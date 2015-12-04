@@ -18,6 +18,7 @@ public class About implements ActionListener
 	JFrame MainFrame=new JFrame("About");
 	public static void main(String[] args) 
 	{
+		System.out.println("Hello");
 		About a=new About();
 	}
 	public About()
