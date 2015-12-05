@@ -70,6 +70,7 @@ public class About implements ActionListener
 		{
 			MainFrame.dispose();
 			System.out.println("Hi");
+			System.out.println("Hello");
 		}
 		
 	}
