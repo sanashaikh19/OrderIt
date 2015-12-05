@@ -69,6 +69,7 @@ public class About implements ActionListener
 		if(e.getSource()==button_close)
 		{
 			MainFrame.dispose();
+			System.out.println("Hi");
 		}
 		
 	}
