@@ -14,12 +14,13 @@ import javax.swing.table.DefaultTableModel;
 
 public class KitchenView 
 {
-	static String column[]=new String[]{"  Order NO  ","  Name  ","  Quantity ","  Table  ","  Order Type  ","  Status  ","  Taken By User  "};
 	
 	public void KitchenView()
-	{
+	{       
+		String column[]=new String[]{"  Order NO  ","  Name  ","  Quantity ","  Table  ","  Order Type  ","  Status  ","  Taken By User  "};
+		final JButton button_showbytable;
 		final JFrame MainFrame=new JFrame("Kitchen View");
-	           
+		JPanel Panel_main=new JPanel(new FlowLayout(FlowLayout.LEFT));
 		DefaultTableModel model;
 	   
 		model=new DefaultTableModel(column,0);
@@ -27,8 +28,7 @@ public class KitchenView
 		
 		JScrollPane pane=new JScrollPane(table);
 		pane.setPreferredSize(new Dimension(1270,500));
-		
-		JPanel Panel_main=new JPanel(new FlowLayout(FlowLayout.LEFT));
+
 		Panel_main.setPreferredSize(new Dimension(900,900));
 		JPanel panel_show=new JPanel(new FlowLayout(FlowLayout.LEFT));
 		panel_show.setBackground(Color.GRAY);
@@ -67,7 +67,18 @@ public class KitchenView
 		button_showprepared.setPreferredSize(new Dimension(140,70));
 		JButton button_showserved=new JButton("Show Served (F5)");
 		button_showserved.setPreferredSize(new Dimension(140,70));
-		JButton button_showbytable=new JButton("Show By Table (F6)");
+		button_showbytable=new JButton("Show By Table (F6)");
+		button_showbytable.addActionListener(new ActionListener()
+		{
+				public void actionPerformed(ActionEvent ae)
+		{
+			if(ae.getSource()==button_showbytable)
+			{
+				Select_Table st=new Select_Table();
+				st.Select_Table();
+			}
+		}
+		});
 		button_showbytable.setPreferredSize(new Dimension(140,70));
 		JButton button_showbytakeaway=new JButton("Show By Takeaway (F7)");
 		button_showbytakeaway.setPreferredSize(new Dimension(140,70));
@@ -84,8 +95,7 @@ public class KitchenView
             {
             	MainFrame.dispose();            	
             }
-        });
-		
+        });	
 		panel_show.add(button_showall);
 		panel_show.add(button_showrecieved);
 		panel_show.add(button_showpreparing);
@@ -122,8 +132,6 @@ public class KitchenView
 		JLabel label_kitchenmode=new JLabel("Kitchen View Mode");
 		panel_kitchen_view_mode.add(label_kitchenmode);
 		
-		
-		
 		JButton button_up=new JButton("UP");
 		button_up.setPreferredSize(new Dimension(70,70));
 		
@@ -150,5 +158,5 @@ public class KitchenView
 		MainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		Panel_main.setBackground(Color.GRAY);
 	}
-
+	
 }
