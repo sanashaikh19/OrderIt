@@ -14,9 +14,9 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
-@SuppressWarnings("serial")
-public class MasterPage extends JFrame
+public class MasterPage extends JFrame implements ActionListener
 {
+	static JPanel Jpanel_MasterPage_TabPanel=new JPanel();
 	static String column[]=new String[]{" Order NO "," Name "," Number Of People "," DateTime "," Phone "," Total "," Status "};
 	static String column1[]=new String[]{" Order NO "," Name "," Phone "," Address "," Date "," Postal Code "," Total ","Status"};
 	static JTabbedPane tab=new JTabbedPane();
@@ -25,6 +25,7 @@ public class MasterPage extends JFrame
 	static JPanel delivery=new JPanel();
 	static JPanel dining=new JPanel();
 	static JPanel receipt_on_hold=new JPanel();
+	static JPanel Panel_kitchen_view=new JPanel(new FlowLayout(FlowLayout.LEFT));
 	
 	public MasterPage()
 	{
@@ -33,13 +34,163 @@ public class MasterPage extends JFrame
 		 delivery();
 		 dining();
 		 receipt_on_hold();
+		 KitchenView();
+		 
+	}
+	public void KitchenView()
+	{       
+		String column[]=new String[]{" Order NO "," Name  "," Quantity "," Table "," Order Type "," Status "," Taken By User "};
+		final JButton button_showbytable;
+		//final JFrame MainFrame=new JFrame("Kitchen View");
+		Panel_kitchen_view.setBackground(Color.gray);
+		DefaultTableModel model;
+	   
+		model=new DefaultTableModel(column,0);
+		JTable table = new JTable(model );
+		
+		JScrollPane pane=new JScrollPane(table);
+		pane.setPreferredSize(new Dimension(1240,340));
+
+		Panel_kitchen_view.setPreferredSize(new Dimension(1330,550));
+		
+		JPanel panel_show=new JPanel(new FlowLayout(FlowLayout.LEFT));
+		panel_show.setBackground(Color.GRAY);
+		panel_show.setPreferredSize(new Dimension(1340,80));
+		
+		JPanel panel_change_status=new JPanel();
+		panel_change_status.setBackground(Color.GRAY);
+		panel_change_status.setBorder(new TitledBorder("Change Status"));
+		//panel_change_status.setPreferredSize(new Dimension(1340,80));
+		
+		JPanel panel_item_remark=new JPanel();
+		panel_item_remark.setBackground(Color.GRAY);
+		panel_item_remark.setBorder(new TitledBorder("Item Remarks"));
+		
+		JPanel panel_order_remark=new JPanel();
+		panel_order_remark.setBackground(Color.GRAY);
+		panel_order_remark.setBorder(new TitledBorder("Order Remark"));
+		
+		JPanel panel_kitchen_view_mode=new JPanel();
+		panel_kitchen_view_mode.setBackground(Color.GRAY);
+		
+		JPanel panel_table=new JPanel();
+		panel_table.setBackground(Color.GRAY);
+		
+		JPanel panel_up_down=new JPanel();
+		panel_up_down.setBorder(new TitledBorder(""));
+		panel_up_down.setBackground(Color.GRAY);
+		panel_up_down.setPreferredSize(new Dimension(75,340));
+
+		JButton button_showall=new JButton("Show All");
+		button_showall.setPreferredSize(new Dimension(100,70));
+		JButton button_showrecieved=new JButton("Show Recieved (F2)");
+		button_showrecieved.setPreferredSize(new Dimension(130,70));
+		JButton button_showpreparing=new JButton("Show Prepairing (F3)");
+		button_showpreparing.setPreferredSize(new Dimension(130,70));
+		JButton button_showprepared=new JButton("Show Prepared (F4)");
+		button_showprepared.setPreferredSize(new Dimension(130,70));
+		JButton button_showserved=new JButton("Show Served (F5)");
+		button_showserved.setPreferredSize(new Dimension(120,70));
+		button_showbytable=new JButton("Show By Table (F6)");
+		button_showbytable.addActionListener(new ActionListener()
+		{
+				public void actionPerformed(ActionEvent ae)
+		{
+			if(ae.getSource()==button_showbytable)
+			{
+				Select_Table st=new Select_Table();
+				st.Select_Table();
+			}
+		}
+		});
+		button_showbytable.setPreferredSize(new Dimension(140,70));
+		JButton button_showbytakeaway=new JButton("Show By Takeaway (F7)");
+		button_showbytakeaway.setPreferredSize(new Dimension(140,70));
+		JButton button_showbydining=new JButton("Show By Dining (F8)");
+		button_showbydining.setPreferredSize(new Dimension(140,70));
+		JButton button_showbydelivery=new JButton("Show By Delivery (F9)");
+		button_showbydelivery.setPreferredSize(new Dimension(140,70));
+		JButton button_close=new JButton("Close(ESC)");
+		button_close.setPreferredSize(new Dimension(100,70));
+		
+		button_close.addActionListener(new ActionListener() 
+        {
+            public void actionPerformed(ActionEvent e) 
+            {
+            	Panel_kitchen_view.setVisible(false);    
+				Jpanel_MasterPage_TabPanel.setVisible(true);					
+
+            }
+        });	
+		panel_show.add(button_showall);
+		panel_show.add(button_showrecieved);
+		panel_show.add(button_showpreparing);
+		panel_show.add( button_showprepared);
+		panel_show.add(button_showserved);
+		panel_show.add(button_showbytable);
+		panel_show.add(button_showbytakeaway);
+		panel_show.add(button_showbydining);
+		panel_show.add(button_showbydelivery);
+		panel_show.add(button_close);
+		
+		//Change Status
+		JButton button_preparing=new JButton("Button_preparing (F9)");
+		button_preparing.setPreferredSize(new Dimension(140,70));
+		JButton button_prepared=new JButton("Button_prepared (F10)");
+		button_prepared.setPreferredSize(new Dimension(140,70));
+		JButton button_served=new JButton("Button_served (F11)");
+		button_served.setPreferredSize(new Dimension(140,70));
+		panel_change_status.add(button_preparing);
+		panel_change_status.add(button_prepared);
+		panel_change_status.add(button_served);
+
+		//text_itemremark
+		JTextField text_itemremark=new JTextField();
+		text_itemremark.setPreferredSize(new Dimension(160,70));
+		panel_item_remark.add(text_itemremark);
+		
+		//Text_orderremark
+		JTextField text_orderremark=new JTextField();
+		text_orderremark.setPreferredSize(new Dimension(160,70));
+		panel_order_remark.add(text_orderremark);
+		
+		//Kitchen Mode
+		JLabel label_kitchenmode=new JLabel("Kitchen View Mode");
+		panel_kitchen_view_mode.add(label_kitchenmode);
+		
+		JButton button_up=new JButton("UP");
+		button_up.setPreferredSize(new Dimension(70,70));
+		
+		JButton button_down=new JButton("DOWN");
+		button_down.setPreferredSize(new Dimension(70,70));
+		
+		panel_table.add(pane);
+		panel_up_down.add(button_up);
+		panel_up_down.add(button_down);
+		panel_table.add(panel_up_down);
+		panel_table.add(panel_up_down,BorderLayout.EAST);
+		
+		Panel_kitchen_view.add(panel_show);
+		Panel_kitchen_view.add(panel_change_status);
+		Panel_kitchen_view.add(panel_item_remark);
+		Panel_kitchen_view.add(panel_order_remark);
+		Panel_kitchen_view.add(panel_kitchen_view_mode);
+		Panel_kitchen_view.add(panel_table);
+		Panel_kitchen_view.setVisible(false);
+		
+		//MainFrame.add(Panel_main);
+	//	MainFrame.setVisible(true);
+	//	MainFrame.setSize(1000, 1000);
+	//	MainFrame.pack();
+	//	MainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+	//	Panel_main.setBackground(Color.GRAY);
 	}
 	
 	public static void main(String[] args) 
 	{
 		MasterPage mg=new MasterPage();
 		
-		final JFrame frame=new JFrame("Order Eat");
+		final JFrame frame=new JFrame("OrderIt");
     	
         JMenuBar Jmenubar_EasyMenu_MasterPage_menuBar = new JMenuBar();
         Jmenubar_EasyMenu_MasterPage_menuBar.setBackground(Color.GRAY);
@@ -147,7 +298,7 @@ public class MasterPage extends JFrame
         JPanel Jpanel_MasterPage_Mainpanel=new JPanel();
         Jpanel_MasterPage_Mainpanel.setBackground(Color.GRAY);
        
-        final JPanel Jpanel_MasterPage_TabPanel=new JPanel();
+        
         Jpanel_MasterPage_TabPanel.setBackground(Color.gray);
         Jpanel_MasterPage_TabPanel.setPreferredSize(new Dimension(1340,560));
         Jpanel_MasterPage_TabPanel.setVisible(false);
@@ -189,8 +340,7 @@ public class MasterPage extends JFrame
 	        }
 	    }); 
         
-        
-        JButton Jbutton_MasterPage_Viewpanel_kitchenviewButton=new JButton("Kitchen View");
+        final JButton Jbutton_MasterPage_Viewpanel_kitchenviewButton=new JButton("Kitchen View");
         Jbutton_MasterPage_Viewpanel_kitchenviewButton.setBackground(Color.LIGHT_GRAY);
         Jbutton_MasterPage_Viewpanel_kitchenviewButton.setPreferredSize(new Dimension(150,65));
         
@@ -198,8 +348,15 @@ public class MasterPage extends JFrame
         {
             public void actionPerformed(ActionEvent e) 
             {
-            	KitchenView k=new KitchenView();
-            	k.KitchenView();            	
+
+				if(e.getSource()==Jbutton_MasterPage_Viewpanel_kitchenviewButton)
+				{
+					Jpanel_MasterPage_TabPanel.setVisible(false);	
+					Panel_kitchen_view.setVisible(true);
+									
+
+				}
+            	
             }
         });
         
@@ -337,9 +494,6 @@ public class MasterPage extends JFrame
         Jpanel_MasterPage_Systempanel.add(Jbutton_MasterPage_Systempanel_enddayButton);
         Jpanel_MasterPage_Systempanel.add(Jbutton_MasterPage_Systempanel_logoutButton);
         Jpanel_MasterPage_Systempanel.add(Jbutton_MasterPage_Systempanel_exitButton);
-     
-       
-        
         
         Jpanel_MasterPage_Mainpanel.add(Jpanel_MasterPage_Logopanel);
         Jpanel_MasterPage_Mainpanel.add(Jpanel_MasterPage_Viewpanel);
@@ -347,6 +501,7 @@ public class MasterPage extends JFrame
         Jpanel_MasterPage_Mainpanel.add(Jpanel_MasterPage_Settingpanel);
         Jpanel_MasterPage_Mainpanel.add(Jpanel_MasterPage_Systempanel);
         Jpanel_MasterPage_Mainpanel.add(Jpanel_MasterPage_TabPanel);
+        Jpanel_MasterPage_Mainpanel.add(Panel_kitchen_view);
         
         frame.add(Jpanel_MasterPage_Mainpanel);
         frame.setVisible(true);
@@ -1117,5 +1272,10 @@ public class MasterPage extends JFrame
 		
 		receipt_on_hold.add(Jpanel_MasterPage_ViewPanel_POS_ButtonPanel_Delivery_Mainpanel);
 		receipt_on_hold.add(jsp);
+	}
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }
