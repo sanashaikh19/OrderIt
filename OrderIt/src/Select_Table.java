@@ -10,9 +10,8 @@ import javax.swing.JTextField;
 
 public class Select_Table 
 {
-	public static void main(String[] args) 
+	public void Select_Table()
 	{
-
 		JFrame MainFrame=new JFrame("Product Report");
 		
 		JPanel panel_main=new JPanel();
@@ -69,6 +68,7 @@ public class Select_Table
 		MainFrame.setVisible(true);
 		MainFrame.setSize(500,500);
 		MainFrame.pack();
+		MainFrame.setLocation(330, 150);
 
 	}
 
