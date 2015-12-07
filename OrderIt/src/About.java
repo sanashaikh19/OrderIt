@@ -19,6 +19,7 @@ public class About implements ActionListener
 	public static void main(String[] args) 
 	{
 		About a=new About();
+		System.out.println("hi");
 	}
 	public About()
 	{
