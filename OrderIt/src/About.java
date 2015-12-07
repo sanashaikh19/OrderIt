@@ -19,7 +19,6 @@ public class About implements ActionListener
 	public static void main(String[] args) 
 	{
 		About a=new About();
-		System.out.println("hi");
 	}
 	public About()
 	{
@@ -32,7 +31,7 @@ public class About implements ActionListener
 		panel_manager.setPreferredSize(new Dimension(200,180));
 		
 		String string_mail_id = "sanarashid@gmail.com";
-		JLabel label_mail_id = new JLabel("<html><a href=\" " + string_mail_id+ "\">sanarashidshaikh@gmail.com</a></html>");
+		JLabel label_mail_id = new JLabel("<html><a href=\" " + string_mail_id+ "\">info@orderit.com</a></html>");
 		label_mail_id.setPreferredSize(new Dimension(175,50));
 		
 		String string_websit = "http://www.orderit.com";
