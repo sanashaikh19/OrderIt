@@ -22,7 +22,7 @@ public class About implements ActionListener
 	}
 	public About()
 	{
-		System.out.println("Hie");
+		//System.out.println("Hie");
 		JPanel panel_main=new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		panel_main.setBackground(Color.GRAY);
 		panel_main.setPreferredSize(new Dimension(330,250));
@@ -66,12 +66,11 @@ public class About implements ActionListener
 		MainFrame.setLocation(450, 200);
 	}
 	
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) 
+	{
 		if(e.getSource()==button_close)
 		{
 			MainFrame.dispose();
-		}
-		
+		}		
 	}
-
 }
