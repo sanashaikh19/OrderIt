@@ -35,13 +35,11 @@ public class MasterPage extends JFrame implements ActionListener
 		 dining();
 		 receipt_on_hold();
 		 KitchenView();
-		 
 	}
 	public void KitchenView()
 	{       
 		String column[]=new String[]{" Order NO "," Name  "," Quantity "," Table "," Order Type "," Status "," Taken By User "};
 		final JButton button_showbytable;
-		//final JFrame MainFrame=new JFrame("Kitchen View");
 		Panel_kitchen_view.setBackground(Color.gray);
 		DefaultTableModel model;
 	   
@@ -60,8 +58,7 @@ public class MasterPage extends JFrame implements ActionListener
 		JPanel panel_change_status=new JPanel();
 		panel_change_status.setBackground(Color.GRAY);
 		panel_change_status.setBorder(new TitledBorder("Change Status"));
-		//panel_change_status.setPreferredSize(new Dimension(1340,80));
-		
+			
 		JPanel panel_item_remark=new JPanel();
 		panel_item_remark.setBackground(Color.GRAY);
 		panel_item_remark.setBorder(new TitledBorder("Item Remarks"));
@@ -83,6 +80,8 @@ public class MasterPage extends JFrame implements ActionListener
 
 		JButton button_showall=new JButton("Show All");
 		button_showall.setPreferredSize(new Dimension(100,70));
+		button_showall.setBackground(Color.LIGHT_GRAY);
+		
 		JButton button_showrecieved=new JButton("Show Recieved (F2)");
 		button_showrecieved.setPreferredSize(new Dimension(130,70));
 		JButton button_showpreparing=new JButton("Show Prepairing (F3)");
@@ -95,13 +94,13 @@ public class MasterPage extends JFrame implements ActionListener
 		button_showbytable.addActionListener(new ActionListener()
 		{
 				public void actionPerformed(ActionEvent ae)
-		{
-			if(ae.getSource()==button_showbytable)
-			{
-				Select_Table st=new Select_Table();
-				st.Select_Table();
-			}
-		}
+				{
+					if(ae.getSource()==button_showbytable)
+					{
+						Select_Table st=new Select_Table();
+						st.Select_Table();
+					}
+				}
 		});
 		button_showbytable.setPreferredSize(new Dimension(140,70));
 		JButton button_showbytakeaway=new JButton("Show By Takeaway (F7)");
