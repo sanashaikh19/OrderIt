@@ -20,6 +20,7 @@ public class About implements ActionListener
 	{
 		About a=new About();
 		System.out.println("hi");
+		System.out.println("hi");
 	}
 	public About()
 	{
