@@ -85,12 +85,19 @@ public class MasterPage extends JFrame implements ActionListener
 		JButton button_showrecieved=new JButton("Show Recieved (F2)");
 		button_showrecieved.setPreferredSize(new Dimension(130,70));
 		button_showrecieved.setBackground(Color.LIGHT_GRAY);
+		
 		JButton button_showpreparing=new JButton("Show Prepairing (F3)");
 		button_showpreparing.setPreferredSize(new Dimension(130,70));
+		button_showpreparing.setBackground(Color.LIGHT_GRAY);
+		
 		JButton button_showprepared=new JButton("Show Prepared (F4)");
 		button_showprepared.setPreferredSize(new Dimension(130,70));
+		button_showprepared.setBackground(Color.LIGHT_GRAY);
+		
 		JButton button_showserved=new JButton("Show Served (F5)");
 		button_showserved.setPreferredSize(new Dimension(120,70));
+		button_showserved.setBackground(Color.LIGHT_GRAY);
+		
 		button_showbytable=new JButton("Show By Table (F6)");
 		button_showbytable.addActionListener(new ActionListener()
 		{
@@ -104,14 +111,23 @@ public class MasterPage extends JFrame implements ActionListener
 				}
 		});
 		button_showbytable.setPreferredSize(new Dimension(140,70));
+		button_showbytable.setBackground(Color.LIGHT_GRAY);
+		
 		JButton button_showbytakeaway=new JButton("Show By Takeaway (F7)");
+		button_showbytakeaway.setBackground(Color.LIGHT_GRAY);
+		
 		button_showbytakeaway.setPreferredSize(new Dimension(140,70));
+		button_showbytakeaway.setBackground(Color.LIGHT_GRAY);
+		
 		JButton button_showbydining=new JButton("Show By Dining (F8)");
 		button_showbydining.setPreferredSize(new Dimension(140,70));
+		button_showbydining.setBackground(Color.LIGHT_GRAY);
 		JButton button_showbydelivery=new JButton("Show By Delivery (F9)");
 		button_showbydelivery.setPreferredSize(new Dimension(140,70));
+		button_showbydelivery.setBackground(Color.LIGHT_GRAY);
 		JButton button_close=new JButton("Close(ESC)");
 		button_close.setPreferredSize(new Dimension(100,70));
+		button_close.setBackground(Color.LIGHT_GRAY);
 		
 		button_close.addActionListener(new ActionListener() 
         {
@@ -136,10 +152,16 @@ public class MasterPage extends JFrame implements ActionListener
 		//Change Status
 		JButton button_preparing=new JButton("Button_preparing (F9)");
 		button_preparing.setPreferredSize(new Dimension(140,70));
+		button_preparing.setBackground(Color.LIGHT_GRAY);
+		
 		JButton button_prepared=new JButton("Button_prepared (F10)");
 		button_prepared.setPreferredSize(new Dimension(140,70));
+		button_prepared.setBackground(Color.LIGHT_GRAY);
+		
 		JButton button_served=new JButton("Button_served (F11)");
 		button_served.setPreferredSize(new Dimension(140,70));
+		button_served.setBackground(Color.LIGHT_GRAY);
+		
 		panel_change_status.add(button_preparing);
 		panel_change_status.add(button_prepared);
 		panel_change_status.add(button_served);
@@ -160,9 +182,11 @@ public class MasterPage extends JFrame implements ActionListener
 		
 		JButton button_up=new JButton("UP");
 		button_up.setPreferredSize(new Dimension(70,70));
+		button_up.setBackground(Color.LIGHT_GRAY);
 		
 		JButton button_down=new JButton("DOWN");
 		button_down.setPreferredSize(new Dimension(70,70));
+		button_down.setBackground(Color.LIGHT_GRAY);
 		
 		panel_table.add(pane);
 		panel_up_down.add(button_up);
