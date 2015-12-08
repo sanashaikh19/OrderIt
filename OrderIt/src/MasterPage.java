@@ -84,6 +84,7 @@ public class MasterPage extends JFrame implements ActionListener
 		
 		JButton button_showrecieved=new JButton("Show Recieved (F2)");
 		button_showrecieved.setPreferredSize(new Dimension(130,70));
+		button_showrecieved.setBackground(Color.LIGHT_GRAY);
 		JButton button_showpreparing=new JButton("Show Prepairing (F3)");
 		button_showpreparing.setPreferredSize(new Dimension(130,70));
 		JButton button_showprepared=new JButton("Show Prepared (F4)");
