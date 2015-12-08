@@ -30,7 +30,7 @@ public class About implements ActionListener
 		panel_manager.setBackground(Color.GRAY);
 		panel_manager.setPreferredSize(new Dimension(200,180));
 		
-		String string_mail_id = "sanarashid@gmail.com";
+		String string_mail_id = "info@orderit.com";
 		JLabel label_mail_id = new JLabel("<html><a href=\" " + string_mail_id+ "\">info@orderit.com</a></html>");
 		label_mail_id.setPreferredSize(new Dimension(175,50));
 		
