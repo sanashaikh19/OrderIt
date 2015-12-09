@@ -16,10 +16,6 @@ public class About implements ActionListener
 {
 	JButton button_close;
 	JFrame MainFrame=new JFrame("About");
-	public static void main(String[] args) 
-	{
-		About a=new About();
-	}
 	public About()
 	{
 		JPanel panel_main=new JPanel(new FlowLayout(FlowLayout.RIGHT));
