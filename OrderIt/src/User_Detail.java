@@ -5,11 +5,17 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.Statement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -19,11 +25,14 @@ public class User_Detail implements ActionListener
 {
 	static String role[] = { "Admin", " ", " " };
 	JFrame MainFrame = new JFrame("User");
-	JButton button_cancel;
+	JButton button_cancel,button_save;
+	JTextField text_user_name,text_password,text_email,text_phone,text_brows;
+	JTextArea textarea_address;
+	JComboBox combobox_role;
 
 	public static void main(String[] args) {
 		User_Detail ud = new User_Detail();
-	}
+		}  
 
 	public User_Detail() {
 	
@@ -53,27 +62,28 @@ public class User_Detail implements ActionListener
 		JLabel label_address = new JLabel("Address");
 		JLabel label_role = new JLabel("Role");
 
-		JTextField text_user_name = new JTextField();
+		text_user_name = new JTextField();
 		text_user_name.setBackground(Color.LIGHT_GRAY);
 
-		JTextField text_password = new JTextField();
+		text_password = new JTextField();
 		text_password.setBackground(Color.LIGHT_GRAY);
 
-		JTextField text_email = new JTextField();
+		text_email = new JTextField();
 		text_email.setBackground(Color.LIGHT_GRAY);
 
-		JTextField text_phone = new JTextField();
+		text_phone = new JTextField();
 		text_phone.setBackground(Color.LIGHT_GRAY);
 
-		JTextArea textarea_address = new JTextArea(4, 1);
+		textarea_address = new JTextArea(4, 1);
 		textarea_address.setBackground(Color.LIGHT_GRAY);
 
-		JTextField text_brows = new JTextField(6);
+		text_brows = new JTextField(6);
 		text_brows.setBackground(Color.LIGHT_GRAY);
 		text_brows.setPreferredSize(new Dimension(50, 30));
 
-		JButton button_save = new JButton("Save");
+		button_save = new JButton("Save");
 		button_save.setPreferredSize(new Dimension(100, 50));
+		button_save.addActionListener(this);
 
 		button_cancel = new JButton("Cancel");
 		button_cancel.setPreferredSize(new Dimension(100, 50));
@@ -82,7 +92,7 @@ public class User_Detail implements ActionListener
 		JButton button_brows = new JButton("Brows");
 		button_brows.setPreferredSize(new Dimension(50, 30));
 
-		JComboBox combobox_role = new JComboBox(role);
+		combobox_role = new JComboBox(role);
 		combobox_role.setPreferredSize(new Dimension(200, 25));
 
 		panel_detail.add(label_user_name);
@@ -117,7 +127,51 @@ public class User_Detail implements ActionListener
 	{
 		if(ae.getSource()==button_cancel)
 			MainFrame.dispose();
+		if(ae.getSource()==button_save)
+		{
+			if (text_user_name.getText().equals("") )
+			{
+				JOptionPane.showMessageDialog(null,"Enter user name");
+			}
+			else
+			{  
+				try
+				{
+					Class.forName("com.mysql.jdbc.Driver");   
+					JOptionPane.showMessageDialog(null, "Customer Complaint Added Successfully","Added",JOptionPane.PLAIN_MESSAGE);
+					Connection con=DriverManager.getConnection("jdbc:mysql://192.168.1.102:3306/rachana","root","root");
+					String sql="insert into users(id,name) values(?,?)";
+					PreparedStatement pstmt = con.prepareStatement(sql);
+
+					pstmt.setString(1,text_user_name.getText());
+					pstmt.setString(2, text_password.getText());
+					pstmt.setString(3, text_email.getText());
+					pstmt.setInt(4,Integer.parseInt(text_phone.getText()));
+					pstmt.setString(5, textarea_address.getText());
+					pstmt.setString(6, combobox_role.getSelectedItem().toString());
+					pstmt.setString(7, text_brows.getText());
+					
+					pstmt.execute();
+					//pstmt.executeUpdate();   
+					JOptionPane.showMessageDialog(null, "Customer Complaint Added Successfully","Added",JOptionPane.PLAIN_MESSAGE);
+
+					text_user_name.setText("");
+					text_password.setText("");
+					text_email.setText("");
+					text_phone.setText("");
+					text_user_name.setText("");
+					text_password.setText("");
+					text_brows.setText("");
+			}
+
+				catch(Exception ex)
+				{
+					System.out.println(ex);
+					JOptionPane.showMessageDialog(null,"Error In Updation","Error",JOptionPane.ERROR_MESSAGE);
+				}
+		}
 		
 	}
 
+}
 }
