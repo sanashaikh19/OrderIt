@@ -1,6 +1,9 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 
 import javax.swing.*;
 
@@ -23,11 +26,9 @@ public class Management_ItemModifier_Item_Add extends JFrame
 		JComboBox JCombobox_MasterPage_ManagementMenu_ItemModifier_Item_Add_Categorypanel_LanguageCombo=new JComboBox(Language_Combo);
 		JCombobox_MasterPage_ManagementMenu_ItemModifier_Item_Add_Categorypanel_LanguageCombo.setPreferredSize(new Dimension(180,30));
 		
-		
-		
 		JLabel JLabel_MasterPage_ManagementMenu_ItemModifier_Item_Add_MainPanel_NameLabel=new JLabel("Name");
 		JLabel_MasterPage_ManagementMenu_ItemModifier_Item_Add_MainPanel_NameLabel.setPreferredSize(new Dimension(70,30));
-		JTextField JTextField_MasterPage_ManagementMenu_ItemModifier_Item_Add_MainPanel_NameTextF=new JTextField();
+		final JTextField JTextField_MasterPage_ManagementMenu_ItemModifier_Item_Add_MainPanel_NameTextF=new JTextField();
 		JTextField_MasterPage_ManagementMenu_ItemModifier_Item_Add_MainPanel_NameTextF.setBackground(Color.LIGHT_GRAY);
 		JTextField_MasterPage_ManagementMenu_ItemModifier_Item_Add_MainPanel_NameTextF.setPreferredSize(new Dimension(180,30));
 		
@@ -37,6 +38,40 @@ public class Management_ItemModifier_Item_Add extends JFrame
 		JButton JButton_MasterPage_ManagementMenu_ItemModifier_Item_Add_MainPanel_SaveButton=new JButton("Save");
 		JButton_MasterPage_ManagementMenu_ItemModifier_Item_Add_MainPanel_SaveButton.setPreferredSize(new Dimension(100,45));
 		JButton_MasterPage_ManagementMenu_ItemModifier_Item_Add_MainPanel_SaveButton.setBackground(Color.LIGHT_GRAY);
+		
+		JButton_MasterPage_ManagementMenu_ItemModifier_Item_Add_MainPanel_SaveButton.addActionListener(new ActionListener() 
+        {
+            public void actionPerformed(ActionEvent e) 
+            {
+            	if(JTextField_MasterPage_ManagementMenu_ItemModifier_Item_Add_MainPanel_NameTextF.equals(""))
+            	{
+            		JOptionPane.showMessageDialog(null,"Please Enter Name.");
+            	}
+            	else
+            	{
+            		try
+            		{
+            		Class.forName("com.mysql.jdbc.Driver");  
+            		
+            		Connection con=DriverManager.getConnection("jdbc:mysql://192.168.1.102:3306/rachana?","root","root");
+            		
+            		String sql="insert into customer(Customer_Name,Customer_Phone,Customer_PostalCode,Customer_EmailID,Customer_Address) VALUES(?,?,?,?,?)";
+            		
+            		PreparedStatement pstmt = con.prepareStatement(sql);
+            		
+            		pstmt.setString(1, JTextField_MasterPage_ManagementMenu_ItemModifier_Item_Add_MainPanel_NameTextF.getText());
+            		pstmt.executeUpdate();
+                	
+                	JOptionPane.showMessageDialog(null, "Added Successfully","Added",JOptionPane.PLAIN_MESSAGE);     
+                	
+            	} catch(Exception ex)
+  	                {
+  	                    System.out.println(ex);
+  	                    JOptionPane.showMessageDialog(null,"Error In Insertion","Error",JOptionPane.ERROR_MESSAGE);
+  	                }
+            	}
+            }
+        });
 		
 		JLabel JLabel_MasterPage_ManagementMenu_ItemModifier_Item_Add_MainPanel_EmptyL=new JLabel("");
 		JLabel_MasterPage_ManagementMenu_ItemModifier_Item_Add_MainPanel_EmptyL.setPreferredSize(new Dimension(30,45));
@@ -70,8 +105,6 @@ public class Management_ItemModifier_Item_Add extends JFrame
 		frame.setVisible(true);
 		frame.setSize(300,220);
 		frame.setLocation(520,280);
-	//	frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		frame.setResizable(false);
-		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);			
+		frame.setResizable(false);	
 	}
 }
