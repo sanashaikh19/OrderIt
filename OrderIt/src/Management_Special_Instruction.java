@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -43,6 +45,15 @@ public class Management_Special_Instruction extends JFrame
 		JButton Jbutton_MasterPage_ManagementMenu_SpecialInstruction_TablePanel_AddButton=new JButton("Add");
 		Jbutton_MasterPage_ManagementMenu_SpecialInstruction_TablePanel_AddButton.setBackground(Color.LIGHT_GRAY);
 		Jbutton_MasterPage_ManagementMenu_SpecialInstruction_TablePanel_AddButton.setPreferredSize(new Dimension(120,50));
+		
+		Jbutton_MasterPage_ManagementMenu_SpecialInstruction_TablePanel_AddButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e) 
+            {
+            	Special_Instruction_Add sia=new Special_Instruction_Add();             
+            }
+        });
+		
 		
 		JButton Jbutton_MasterPage_ManagementMenu_SpecialInstruction_TablePanel_EditButton=new JButton("Edit");
 		Jbutton_MasterPage_ManagementMenu_SpecialInstruction_TablePanel_EditButton.setBackground(Color.LIGHT_GRAY);
