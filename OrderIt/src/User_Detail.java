@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FileDialog;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -25,22 +26,22 @@ public class User_Detail implements ActionListener
 {
 	static String role[] = { "Admin", " ", " " };
 	JFrame MainFrame = new JFrame("User");
-	JButton button_cancel,button_save;
+	JButton button_cancel,button_save,button_brows;
 	JTextField text_user_name,text_password,text_email,text_phone,text_brows;
 	JTextArea textarea_address;
 	JComboBox combobox_role;
 
 	public static void main(String[] args) {
 		User_Detail ud = new User_Detail();
-		}  
+	}  
 
 	public User_Detail() {
-	
+
 
 		JPanel panel_main = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		panel_main.setBackground(Color.GRAY);
 		panel_main.setPreferredSize(new Dimension(560, 360));
-		
+
 		JPanel panel_detail = new JPanel();
 		panel_detail.setBackground(Color.GRAY);
 		panel_detail.setPreferredSize(new Dimension(400, 300));
@@ -89,7 +90,7 @@ public class User_Detail implements ActionListener
 		button_cancel.setPreferredSize(new Dimension(100, 50));
 		button_cancel.addActionListener((ActionListener) this);
 
-		JButton button_brows = new JButton("Brows");
+		button_brows = new JButton("Brows");
 		button_brows.setPreferredSize(new Dimension(50, 30));
 
 		combobox_role = new JComboBox(role);
@@ -127,6 +128,13 @@ public class User_Detail implements ActionListener
 	{
 		if(ae.getSource()==button_cancel)
 			MainFrame.dispose();
+		if(ae.getSource()==button_brows)
+		{
+			FileDialog fdlgImage = new FileDialog(MainFrame);
+			fdlgImage.setVisible(true);
+			//link = fdlgImage.getDirectory() + fdlgImage.getFile();
+
+		}
 		if(ae.getSource()==button_save)
 		{
 			if (text_user_name.getText().equals("") )
@@ -138,9 +146,8 @@ public class User_Detail implements ActionListener
 				try
 				{
 					Class.forName("com.mysql.jdbc.Driver");   
-					JOptionPane.showMessageDialog(null, "Customer Complaint Added Successfully","Added",JOptionPane.PLAIN_MESSAGE);
 					Connection con=DriverManager.getConnection("jdbc:mysql://192.168.1.102:3306/rachana","root","root");
-					String sql="insert into users(id,name) values(?,?)";
+					String sql="insert into users(Users_Username,Users_Phone,Users_Email,Users_Address,Users_Role,Users_Image,User_Password) values(?,?,?,?,?,?,?)";
 					PreparedStatement pstmt = con.prepareStatement(sql);
 
 					pstmt.setString(1,text_user_name.getText());
@@ -150,9 +157,9 @@ public class User_Detail implements ActionListener
 					pstmt.setString(5, textarea_address.getText());
 					pstmt.setString(6, combobox_role.getSelectedItem().toString());
 					pstmt.setString(7, text_brows.getText());
-					
+					//	pstmt.setBinaryStream(8, fis, fis.available());
+
 					pstmt.execute();
-					//pstmt.executeUpdate();   
 					JOptionPane.showMessageDialog(null, "Customer Complaint Added Successfully","Added",JOptionPane.PLAIN_MESSAGE);
 
 					text_user_name.setText("");
@@ -162,16 +169,16 @@ public class User_Detail implements ActionListener
 					text_user_name.setText("");
 					text_password.setText("");
 					text_brows.setText("");
-			}
+				}
 
 				catch(Exception ex)
 				{
 					System.out.println(ex);
 					JOptionPane.showMessageDialog(null,"Error In Updation","Error",JOptionPane.ERROR_MESSAGE);
 				}
-		}
-		
-	}
+			}
 
-}
+		}
+
+	}
 }
