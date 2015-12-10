@@ -15,6 +15,10 @@ public class Management_Promotion_Add extends JFrame
 	{
 		final JFrame frame=new JFrame("Promotion Details");	
 		
+		final JLabel l=new JLabel();
+		l.setPreferredSize(new Dimension(200,160));
+		l.setBorder(new TitledBorder(""));
+		
 		JPanel Jpanel_MasterPage_ManagementMenu_Promotion_Add_Mainpanel=new JPanel(new FlowLayout(FlowLayout.LEFT));
 		Jpanel_MasterPage_ManagementMenu_Promotion_Add_Mainpanel.setBackground(Color.GRAY);
 		
@@ -57,19 +61,32 @@ public class Management_Promotion_Add extends JFrame
 		JLabel JLabel_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PictureLabel=new JLabel("Picture");
 		JLabel_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PictureLabel.setPreferredSize(new Dimension(120,30));
 		
-		JPanel Jpanel_MasterPage_ManagementMenu_Promotion_Add_Mainpanel_PicturePanel=new JPanel(new FlowLayout(FlowLayout.LEFT));
-		Jpanel_MasterPage_ManagementMenu_Promotion_Add_Mainpanel_PicturePanel.setBackground(Color.GRAY);
-		Jpanel_MasterPage_ManagementMenu_Promotion_Add_Mainpanel_PicturePanel.setBorder(new TitledBorder(""));
-		Jpanel_MasterPage_ManagementMenu_Promotion_Add_Mainpanel_PicturePanel.setPreferredSize(new Dimension(230,150));
-		
 		JLabel JLabel_MasterPage_ManagementMenu_Promotion_Add_MainPanel_EmptyLabel=new JLabel("");
 		JLabel_MasterPage_ManagementMenu_Promotion_Add_MainPanel_EmptyLabel.setPreferredSize(new Dimension(120,30));
-		JTextField JTextField_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PictureTextF=new JTextField();
+		final JTextField JTextField_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PictureTextF=new JTextField();
 		JTextField_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PictureTextF.setPreferredSize(new Dimension(130,30));
 		
 		JButton JButton_MasterPage_ManagementMenu_Promotion_Add_MainPanel_BrowseButton=new JButton("Browse");
 		JButton_MasterPage_ManagementMenu_Promotion_Add_MainPanel_BrowseButton.setPreferredSize(new Dimension(90,30));
 		JButton_MasterPage_ManagementMenu_Promotion_Add_MainPanel_BrowseButton.setBackground(Color.LIGHT_GRAY);
+		
+		JButton_MasterPage_ManagementMenu_Promotion_Add_MainPanel_BrowseButton.addActionListener(new ActionListener() 
+	    {
+			public void actionPerformed(ActionEvent e) 
+	        {
+				JFileChooser fileChooser = new JFileChooser();				 
+			    fileChooser.setFileSelectionMode(JFileChooser.CUSTOM_DIALOG);			 
+			    fileChooser.setAcceptAllFileFilterUsed(true);			 
+			    int rVal = fileChooser.showOpenDialog(null);
+			    if (rVal == JFileChooser.APPROVE_OPTION) 
+			    {
+			      	String s=fileChooser.getSelectedFile().toString();
+			      	JTextField_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PictureTextF.setText(s);
+			       	ImageIcon image_takeout_sale = new ImageIcon(s);
+			       	l.setIcon(image_takeout_sale);	       	
+			    }
+	         }
+		});
 		
 		JButton JButton_MasterPage_ManagementMenu_Promotion_Add_MainPanel_SaveButton=new JButton("Save");
 		JButton_MasterPage_ManagementMenu_Promotion_Add_MainPanel_SaveButton.setPreferredSize(new Dimension(120,55));
@@ -145,7 +162,7 @@ public class Management_Promotion_Add extends JFrame
 		Jpanel_MasterPage_ManagementMenu_Promotion_Add_Mainpanel.add(JLabel_MasterPage_ManagementMenu_Promotion_Add_MainPanel_CouponCodeLabel);
 		Jpanel_MasterPage_ManagementMenu_Promotion_Add_Mainpanel.add(JTextField_MasterPage_ManagementMenu_Promotion_Add_MainPanel_CouponCodeTextF);
 		Jpanel_MasterPage_ManagementMenu_Promotion_Add_Mainpanel.add(JLabel_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PictureLabel);
-		Jpanel_MasterPage_ManagementMenu_Promotion_Add_Mainpanel.add(Jpanel_MasterPage_ManagementMenu_Promotion_Add_Mainpanel_PicturePanel);
+		Jpanel_MasterPage_ManagementMenu_Promotion_Add_Mainpanel.add(l);
 		Jpanel_MasterPage_ManagementMenu_Promotion_Add_Mainpanel.add(JLabel_MasterPage_ManagementMenu_Promotion_Add_MainPanel_EmptyLabel);
 		Jpanel_MasterPage_ManagementMenu_Promotion_Add_Mainpanel.add(JTextField_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PictureTextF);
 		Jpanel_MasterPage_ManagementMenu_Promotion_Add_Mainpanel.add(JButton_MasterPage_ManagementMenu_Promotion_Add_MainPanel_BrowseButton);

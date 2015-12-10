@@ -12,8 +12,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -30,14 +32,13 @@ public class User_Detail implements ActionListener
 	JTextField text_user_name,text_password,text_email,text_phone,text_brows;
 	JTextArea textarea_address;
 	JComboBox combobox_role;
-
-	public static void main(String[] args) {
-		User_Detail ud = new User_Detail();
-	}  
+	JLabel l=new JLabel();
 
 	public User_Detail() {
 
-
+		l.setPreferredSize(new Dimension(130,140));
+		l.setBorder(new TitledBorder(""));
+		
 		JPanel panel_main = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		panel_main.setBackground(Color.GRAY);
 		panel_main.setPreferredSize(new Dimension(560, 360));
@@ -46,11 +47,6 @@ public class User_Detail implements ActionListener
 		panel_detail.setBackground(Color.GRAY);
 		panel_detail.setPreferredSize(new Dimension(400, 300));
 		panel_detail.setLayout(new GridLayout(7, 2, 10, 10));
-
-		JPanel panel_image = new JPanel();
-		panel_image.setBackground(Color.GRAY);
-		panel_image.setPreferredSize(new Dimension(130, 140));
-		panel_image.setBorder(new TitledBorder(""));
 
 		JPanel panel_photo = new JPanel();
 		panel_photo.setBackground(Color.GRAY);
@@ -92,6 +88,7 @@ public class User_Detail implements ActionListener
 
 		button_brows = new JButton("Brows");
 		button_brows.setPreferredSize(new Dimension(50, 30));
+		button_brows.addActionListener(this);
 
 		combobox_role = new JComboBox(role);
 		combobox_role.setPreferredSize(new Dimension(200, 25));
@@ -109,7 +106,7 @@ public class User_Detail implements ActionListener
 		panel_detail.add(label_role);
 		panel_detail.add(combobox_role);
 
-		panel_photo.add(panel_image);
+		panel_photo.add(l);
 		panel_photo.add(text_brows);
 		panel_photo.add(button_brows);
 
@@ -128,11 +125,20 @@ public class User_Detail implements ActionListener
 	{
 		if(ae.getSource()==button_cancel)
 			MainFrame.dispose();
-		if(ae.getSource()==button_brows)
+		
+		else if(ae.getSource()==button_brows)
 		{
-			FileDialog fdlgImage = new FileDialog(MainFrame);
-			fdlgImage.setVisible(true);
-			//link = fdlgImage.getDirectory() + fdlgImage.getFile();
+			JFileChooser fileChooser = new JFileChooser();				 
+		    fileChooser.setFileSelectionMode(JFileChooser.CUSTOM_DIALOG);			 
+		    fileChooser.setAcceptAllFileFilterUsed(true);			 
+		    int rVal = fileChooser.showOpenDialog(null);
+		    if (rVal == JFileChooser.APPROVE_OPTION) 
+		    {
+		      	String s=fileChooser.getSelectedFile().toString();
+		      	text_brows.setText(s);
+		       	ImageIcon image_takeout_sale = new ImageIcon(s);
+		       	l.setIcon(image_takeout_sale);	       	
+		    }
 
 		}
 		if(ae.getSource()==button_save)

@@ -16,6 +16,11 @@ public class Management_Items_Add extends JFrame
 	public void Management_Items_Add() 
 	{
 		final JFrame frame=new JFrame("Item Details");
+		
+		final JLabel l=new JLabel();
+		l.setPreferredSize(new Dimension(180,120));
+		l.setBorder(new TitledBorder(""));
+		
 
 		JPanel Jpanel_MasterPage_ManagementMenu_Item_Add_Mainpanel=new JPanel();
 		Jpanel_MasterPage_ManagementMenu_Item_Add_Mainpanel.setBackground(Color.GRAY);
@@ -66,20 +71,33 @@ public class Management_Items_Add extends JFrame
 		JLabel JLabel_MasterPage_ManagementMenu_Item_Add_CategoryPanel_ImageLabel=new JLabel("Image");
 		JLabel_MasterPage_ManagementMenu_Item_Add_CategoryPanel_ImageLabel.setPreferredSize(new Dimension(100,30));
 
-		JPanel JPanel_MasterPage_ManagementMenu_Item_Add_CategoryPanel_ImagePanel=new JPanel();
-		JPanel_MasterPage_ManagementMenu_Item_Add_CategoryPanel_ImagePanel.setPreferredSize(new Dimension(180,100));
-		JPanel_MasterPage_ManagementMenu_Item_Add_CategoryPanel_ImagePanel.setBackground(Color.GRAY);
-		JPanel_MasterPage_ManagementMenu_Item_Add_CategoryPanel_ImagePanel.setBorder(new TitledBorder(""));
-
 		JLabel EmptyLabel=new JLabel();
 		EmptyLabel.setPreferredSize(new Dimension(100,30));
 
-		JTextField JTextField_MasterPage_ManagementMenu_Item_Add_CategoryPanel_ImageTextF=new JTextField();
+		final JTextField JTextField_MasterPage_ManagementMenu_Item_Add_CategoryPanel_ImageTextF=new JTextField();
 		JTextField_MasterPage_ManagementMenu_Item_Add_CategoryPanel_ImageTextF.setPreferredSize(new Dimension(95,30));
 
 		JButton JButton_MasterPage_ManagementMenu_Item_Add_CategoryPanel_BrowseButton=new JButton("Browse"); 
 		JButton_MasterPage_ManagementMenu_Item_Add_CategoryPanel_BrowseButton.setBackground(Color.LIGHT_GRAY);
 		JButton_MasterPage_ManagementMenu_Item_Add_CategoryPanel_BrowseButton.setPreferredSize(new Dimension(80,35));
+		
+		JButton_MasterPage_ManagementMenu_Item_Add_CategoryPanel_BrowseButton.addActionListener(new ActionListener() 
+	    {
+			public void actionPerformed(ActionEvent e) 
+	        {
+				JFileChooser fileChooser = new JFileChooser();				 
+			    fileChooser.setFileSelectionMode(JFileChooser.CUSTOM_DIALOG);			 
+			    fileChooser.setAcceptAllFileFilterUsed(true);			 
+			    int rVal = fileChooser.showOpenDialog(null);
+			    if (rVal == JFileChooser.APPROVE_OPTION) 
+			    {
+			      	String s=fileChooser.getSelectedFile().toString();
+			      	JTextField_MasterPage_ManagementMenu_Item_Add_CategoryPanel_ImageTextF.setText(s);
+			       	ImageIcon image_takeout_sale = new ImageIcon(s);
+			       	l.setIcon(image_takeout_sale);	       	
+			    }
+	         }
+		});
 
 		JLabel JLabel_MasterPage_ManagementMenu_Item_Add_CategoryPanel_DescriptionLabel=new JLabel("Description");
 		JLabel_MasterPage_ManagementMenu_Item_Add_CategoryPanel_DescriptionLabel.setPreferredSize(new Dimension(100,30));
@@ -102,7 +120,7 @@ public class Management_Items_Add extends JFrame
 		Jpanel_MasterPage_ManagementMenu_Item_Add_CategoryPanel.add(JLabel_MasterPage_ManagementMenu_Item_Add_CategoryPanel_TaxLabel);
 		Jpanel_MasterPage_ManagementMenu_Item_Add_CategoryPanel.add(JTextField_MasterPage_ManagementMenu_Item_Add_CategoryPanel_TaxTextf);
 		Jpanel_MasterPage_ManagementMenu_Item_Add_CategoryPanel.add(JLabel_MasterPage_ManagementMenu_Item_Add_CategoryPanel_ImageLabel);
-		Jpanel_MasterPage_ManagementMenu_Item_Add_CategoryPanel.add(JPanel_MasterPage_ManagementMenu_Item_Add_CategoryPanel_ImagePanel);
+		Jpanel_MasterPage_ManagementMenu_Item_Add_CategoryPanel.add(l);
 		Jpanel_MasterPage_ManagementMenu_Item_Add_CategoryPanel.add(EmptyLabel);
 		Jpanel_MasterPage_ManagementMenu_Item_Add_CategoryPanel.add(JTextField_MasterPage_ManagementMenu_Item_Add_CategoryPanel_ImageTextF);
 		Jpanel_MasterPage_ManagementMenu_Item_Add_CategoryPanel.add(JButton_MasterPage_ManagementMenu_Item_Add_CategoryPanel_BrowseButton);
