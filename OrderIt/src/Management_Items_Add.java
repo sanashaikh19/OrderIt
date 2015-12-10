@@ -175,7 +175,7 @@ public class Management_Items_Add extends JFrame
 					{
 						Class.forName("com.mysql.jdbc.Driver");  
 						Connection con=DriverManager.getConnection("jdbc:mysql://192.168.1.102:3306/rachana?","root","root");
-						String sql="insert into item_details(Customer_Name,Customer_Phone,Customer_PostalCode,Customer_EmailID,Customer_Address) VALUES(?,?,?,?,?)";
+						String sql="insert into item_details() VALUES(?,?,?,?,?)";
 						PreparedStatement pstmt = con.prepareStatement(sql);
 						
 						pstmt.setString(1, JTextField_MasterPage_ManagementMenu_Item_Add_CategoryPanel_NameTextF.getText());
@@ -208,7 +208,6 @@ public class Management_Items_Add extends JFrame
 				frame.dispose();
 			}
 		});
-
 		Jpanel_MasterPage_ManagementMenu_Item_Add_Mainpanel.add(Jpanel_MasterPage_ManagementMenu_Item_Add_CategoryPanel);
 		Jpanel_MasterPage_ManagementMenu_Item_Add_Mainpanel.add(Jpanel_MasterPage_ManagementMenu_Item_Add_TablePanel);
 		Jpanel_MasterPage_ManagementMenu_Item_Add_Mainpanel.add(JButton_MasterPage_ManagementMenu_Item_Add_MainPanel_SaveButton);

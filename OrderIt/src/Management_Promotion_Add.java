@@ -1,6 +1,9 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -19,23 +22,23 @@ public class Management_Promotion_Add extends JFrame
 		JLabel_MasterPage_ManagementMenu_Promotion_Add_MainPanel_ItemLabel.setPreferredSize(new Dimension(120,30));
 		
 		String Department_Combo[]=new String[]{"Falafel"};
-		JComboBox JCombobox_MasterPage_ManagementMenu_Promotion_Add_MainPanel_ItemCombo=new JComboBox(Department_Combo);
+		final JComboBox JCombobox_MasterPage_ManagementMenu_Promotion_Add_MainPanel_ItemCombo=new JComboBox(Department_Combo);
 		JCombobox_MasterPage_ManagementMenu_Promotion_Add_MainPanel_ItemCombo.setPreferredSize(new Dimension(230,30));
 		JCombobox_MasterPage_ManagementMenu_Promotion_Add_MainPanel_ItemCombo.setBackground(Color.LIGHT_GRAY);
 		
 		JLabel JLabel_MasterPage_ManagementMenu_Promotion_Add_MainPanel_OldPriceLabel=new JLabel("Old Price");
 		JLabel_MasterPage_ManagementMenu_Promotion_Add_MainPanel_OldPriceLabel.setPreferredSize(new Dimension(120,30));
-		JTextField JTextField_MasterPage_ManagementMenu_Promotion_Add_MainPanel_OldPriceTextF=new JTextField();
+		final JTextField JTextField_MasterPage_ManagementMenu_Promotion_Add_MainPanel_OldPriceTextF=new JTextField();
 		JTextField_MasterPage_ManagementMenu_Promotion_Add_MainPanel_OldPriceTextF.setPreferredSize(new Dimension(230,30));
 		
 		JLabel JLabel_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PromotePriceLabel=new JLabel("Promote Price");
 		JLabel_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PromotePriceLabel.setPreferredSize(new Dimension(120,30));
-		JTextField JTextField_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PromotePriceTextF=new JTextField();
+		final JTextField JTextField_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PromotePriceTextF=new JTextField();
 		JTextField_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PromotePriceTextF.setPreferredSize(new Dimension(230,30));
 		
 		JLabel JLabel_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PromoteTextLabel=new JLabel("Promote Text");
 		JLabel_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PromoteTextLabel.setPreferredSize(new Dimension(120,30));
-		JTextArea JTextArea_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PromoteTextTextA=new JTextArea();
+		final JTextArea JTextArea_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PromoteTextTextA=new JTextArea();
 		JTextArea_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PromoteTextTextA.setPreferredSize(new Dimension(230,70));
 		
 		JLabel JLabel_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PromoteColorLabel=new JLabel("Promote Color");
@@ -48,7 +51,7 @@ public class Management_Promotion_Add extends JFrame
 		
 		JLabel JLabel_MasterPage_ManagementMenu_Promotion_Add_MainPanel_CouponCodeLabel=new JLabel("Coupon Code");
 		JLabel_MasterPage_ManagementMenu_Promotion_Add_MainPanel_CouponCodeLabel.setPreferredSize(new Dimension(120,30));
-		JTextField JTextField_MasterPage_ManagementMenu_Promotion_Add_MainPanel_CouponCodeTextF=new JTextField();
+		final JTextField JTextField_MasterPage_ManagementMenu_Promotion_Add_MainPanel_CouponCodeTextF=new JTextField();
 		JTextField_MasterPage_ManagementMenu_Promotion_Add_MainPanel_CouponCodeTextF.setPreferredSize(new Dimension(230,30));
 		
 		JLabel JLabel_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PictureLabel=new JLabel("Picture");
@@ -71,6 +74,48 @@ public class Management_Promotion_Add extends JFrame
 		JButton JButton_MasterPage_ManagementMenu_Promotion_Add_MainPanel_SaveButton=new JButton("Save");
 		JButton_MasterPage_ManagementMenu_Promotion_Add_MainPanel_SaveButton.setPreferredSize(new Dimension(120,55));
 		JButton_MasterPage_ManagementMenu_Promotion_Add_MainPanel_SaveButton.setBackground(Color.LIGHT_GRAY);
+		
+		JButton_MasterPage_ManagementMenu_Promotion_Add_MainPanel_SaveButton.addActionListener(new ActionListener() 
+        {
+            public void actionPerformed(ActionEvent e) 
+            {
+
+				if (JTextField_MasterPage_ManagementMenu_Promotion_Add_MainPanel_OldPriceTextF.getText().equals("") )
+                {
+					JOptionPane.showMessageDialog(null,"Enter Old Price.");
+                }
+				else
+                {               
+                	try
+                	{   
+                		Class.forName("com.mysql.jdbc.Driver");  
+                		
+                		Connection con=DriverManager.getConnection("jdbc:mysql://192.168.1.102:3306/rachana?","root","root");
+                		
+                		String sql="insert into promotion() VALUES(?,?,?,?,?,?)";
+                		
+                		PreparedStatement pstmt = con.prepareStatement(sql);
+                		
+                		pstmt.setString(1, JCombobox_MasterPage_ManagementMenu_Promotion_Add_MainPanel_ItemCombo.getSelectedItem().toString());
+                		pstmt.setString(2, JTextField_MasterPage_ManagementMenu_Promotion_Add_MainPanel_OldPriceTextF.getText());
+                		pstmt.setString(3, JTextField_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PromotePriceTextF.getText());
+                		pstmt.setString(4, JTextArea_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PromoteTextTextA.getText());
+                		pstmt.setString(5, JTextField_MasterPage_ManagementMenu_Promotion_Add_MainPanel_CouponCodeTextF.getText());
+                		
+                		
+                    	pstmt.executeUpdate();
+                    	
+                    	JOptionPane.showMessageDialog(null, "Added Successfully","Added",JOptionPane.PLAIN_MESSAGE);                	   
+                	}
+
+	                catch(Exception ex)
+	                {
+	                    System.out.println(ex);
+	                    JOptionPane.showMessageDialog(null,"Error In Insertion","Error",JOptionPane.ERROR_MESSAGE);
+	                }
+                }
+            }
+        });
 		
 		JLabel JLabel_MasterPage_ManagementMenu_Promotion_Add_MainPanel_EmptyL=new JLabel("");
 		JLabel_MasterPage_ManagementMenu_Promotion_Add_MainPanel_EmptyL.setPreferredSize(new Dimension(90,55));
@@ -95,8 +140,8 @@ public class Management_Promotion_Add extends JFrame
 		Jpanel_MasterPage_ManagementMenu_Promotion_Add_Mainpanel.add(JTextField_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PromotePriceTextF);
 		Jpanel_MasterPage_ManagementMenu_Promotion_Add_Mainpanel.add(JLabel_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PromoteTextLabel);
 		Jpanel_MasterPage_ManagementMenu_Promotion_Add_Mainpanel.add(JTextArea_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PromoteTextTextA);
-		Jpanel_MasterPage_ManagementMenu_Promotion_Add_Mainpanel.add(JLabel_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PromoteColorLabel);
-		Jpanel_MasterPage_ManagementMenu_Promotion_Add_Mainpanel.add(JColorChooser_MasterPage_ManagementMenu_Promotion_Add_MainPanel_Color);
+		//Jpanel_MasterPage_ManagementMenu_Promotion_Add_Mainpanel.add(JLabel_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PromoteColorLabel);
+		//Jpanel_MasterPage_ManagementMenu_Promotion_Add_Mainpanel.add(JColorChooser_MasterPage_ManagementMenu_Promotion_Add_MainPanel_Color);
 		Jpanel_MasterPage_ManagementMenu_Promotion_Add_Mainpanel.add(JLabel_MasterPage_ManagementMenu_Promotion_Add_MainPanel_CouponCodeLabel);
 		Jpanel_MasterPage_ManagementMenu_Promotion_Add_Mainpanel.add(JTextField_MasterPage_ManagementMenu_Promotion_Add_MainPanel_CouponCodeTextF);
 		Jpanel_MasterPage_ManagementMenu_Promotion_Add_Mainpanel.add(JLabel_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PictureLabel);
@@ -113,8 +158,6 @@ public class Management_Promotion_Add extends JFrame
 		frame.setVisible(true);
 		frame.setSize(380,550);
 		frame.setLocation(450,80);
-	//	frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.setResizable(false);
-	//	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 	}
 }
