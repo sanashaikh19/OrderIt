@@ -174,34 +174,24 @@ public class Management_Items_Add extends JFrame
 					try
 					{
 						Class.forName("com.mysql.jdbc.Driver");  
-
 						Connection con=DriverManager.getConnection("jdbc:mysql://192.168.1.102:3306/rachana?","root","root");
-
-						String sql="insert into customer(Customer_Name,Customer_Phone,Customer_PostalCode,Customer_EmailID,Customer_Address) VALUES(?,?,?,?,?)";
-
+						String sql="insert into item_details(Customer_Name,Customer_Phone,Customer_PostalCode,Customer_EmailID,Customer_Address) VALUES(?,?,?,?,?)";
 						PreparedStatement pstmt = con.prepareStatement(sql);
-
+						
 						pstmt.setString(1, JTextField_MasterPage_ManagementMenu_Item_Add_CategoryPanel_NameTextF.getText());
-
 						pstmt.setString(2, JTextField_MasterPage_ManagementMenu_Item_Add_CategoryPanel_DefaultNameTextF.getText());
-
 						pstmt.setString(3, JTextField_MasterPage_ManagementMenu_Item_Add_CategoryPanel_EnoughForTextF.getText());
-
 						pstmt.setString(4, JTextField_MasterPage_ManagementMenu_Item_Add_CategoryPanel_PriceTextF.getText());
-
 						pstmt.setString(7, JTextField_MasterPage_ManagementMenu_Item_Add_CategoryPanel_TaxTextf.getText());
-
-						pstmt.setString(9, JTextArea_MasterPage_ManagementMenu_Item_Add_CategoryPanel_DescriptionTextA.getText());
-						
+						pstmt.setString(9, JTextArea_MasterPage_ManagementMenu_Item_Add_CategoryPanel_DescriptionTextA.getText());	
 						pstmt.setString(11, JTextArea_MasterPage_ManagementMenu_Item_Add_IngredientPanel_IngridientTextA.getText());
-						
 						pstmt.executeUpdate();
 
 						JOptionPane.showMessageDialog(null, "Added Successfully","Added",JOptionPane.PLAIN_MESSAGE);                	   
 					}
 					catch(Exception e1)
 					{
-
+						 JOptionPane.showMessageDialog(null,"Error In Insertion","Error",JOptionPane.ERROR_MESSAGE);
 					}
 				}
 			}
