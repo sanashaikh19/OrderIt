@@ -95,36 +95,27 @@ public class Management_Customer_Add extends JFrame
                 {               
                 	try
                 	{   
-                		Class.forName("com.mysql.jdbc.Driver");  
-                		
+                		Class.forName("com.mysql.jdbc.Driver");                  		
                 		Connection con=DriverManager.getConnection("jdbc:mysql://192.168.1.102:3306/rachana?","root","root");
-                		
-                		String sql="insert into customer(Customer_Name,Customer_Phone,Customer_PostalCode,Customer_EmailID,Customer_Address) VALUES(?,?,?,?,?)";
-                		
+                		String sql="insert into customer(Customer_Name,Customer_Phone,Customer_PostalCode,Customer_EmailID,Customer_Address) VALUES(?,?,?,?,?)";               		
                 		PreparedStatement pstmt = con.prepareStatement(sql);
                 		
-                		pstmt.setString(1, JTextField_MasterPage_ManagementMenu_Customer_Add_Categorypanel_NameTextF.getText());
-                		
-                    	pstmt.setString(2, JTextField_MasterPage_ManagementMenu_Customer_Add_Categorypanel_PhoneTextF.getText());
-                    	
-                    	pstmt.setString(3, JTextField_MasterPage_ManagementMenu_Customer_Add_Categorypanel_PostalCodeTextF.getText());
-                    	
-                    	pstmt.setString(4, JTextField_MasterPage_ManagementMenu_Customer_Add_Categorypanel_EmailTextF.getText());
-                    	
+                		pstmt.setString(1, JTextField_MasterPage_ManagementMenu_Customer_Add_Categorypanel_NameTextF.getText());                		
+                    	pstmt.setString(2, JTextField_MasterPage_ManagementMenu_Customer_Add_Categorypanel_PhoneTextF.getText());                    	
+                    	pstmt.setString(3, JTextField_MasterPage_ManagementMenu_Customer_Add_Categorypanel_PostalCodeTextF.getText());                   	
+                    	pstmt.setString(4, JTextField_MasterPage_ManagementMenu_Customer_Add_Categorypanel_EmailTextF.getText());                  	
                     	pstmt.setString(5, JTextArea_MasterPage_ManagementMenu_Customer_Add_Categorypanel_AddressTextA.getText());
                     	
                     	pstmt.executeUpdate();
                     	
                     	JOptionPane.showMessageDialog(null, "Added Successfully","Added",JOptionPane.PLAIN_MESSAGE);                	   
                 	}
-
 	                catch(Exception ex)
 	                {
 	                    System.out.println(ex);
 	                    JOptionPane.showMessageDialog(null,"Error In Insertion","Error",JOptionPane.ERROR_MESSAGE);
 	                }
-                }
-				
+                }	
 	        }
 	    });
 		
