@@ -10,7 +10,7 @@ import javax.swing.filechooser.FileFilter;
 
 public class Management_Categoty_Add extends JFrame 
 {
-
+	JLabel l;
 	public void Management_Categoty_Add()
 	{
 		final JFrame frame=new JFrame("Category List");
@@ -32,6 +32,7 @@ public class Management_Categoty_Add extends JFrame
 		JPanel_MasterPage_ManagementMenu_Category_Add_Mainpanel_ImageLabel_Panel.setBackground(Color.gray);
 		JPanel_MasterPage_ManagementMenu_Category_Add_Mainpanel_ImageLabel_Panel.setBorder(new TitledBorder(""));
 		
+		
 		final JTextField JTextField_MasterPage_ManagementMenu_Category_Add_Mainpanel_ImageTextF=new JTextField();
 		JTextField_MasterPage_ManagementMenu_Category_Add_Mainpanel_ImageTextF.setPreferredSize(new Dimension(105,30));
 
@@ -43,24 +44,26 @@ public class Management_Categoty_Add extends JFrame
 	    {
 			public void actionPerformed(ActionEvent e) 
 	        {
-				 JFileChooser fileChooser = new JFileChooser();
+				JFileChooser fileChooser = new JFileChooser();
 				 
-			        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+			    fileChooser.setFileSelectionMode(JFileChooser.CUSTOM_DIALOG);
 			 
-			        fileChooser.setAcceptAllFileFilterUsed(false);
+			    fileChooser.setAcceptAllFileFilterUsed(true);
 			 
-			        int rVal = fileChooser.showOpenDialog(null);
-			        if (rVal == JFileChooser.APPROVE_OPTION) 
-			        {
-			        	String s=fileChooser.getSelectedFile().toString();
-			        	JTextField_MasterPage_ManagementMenu_Category_Add_Mainpanel_ImageTextF.setText(s);
-			        	ImageIcon image_takeout_sale = new ImageIcon(s);
-			        	JLabel l=new JLabel(image_takeout_sale);
-			        	JPanel_MasterPage_ManagementMenu_Category_Add_Mainpanel_ImageLabel_Panel.add(l);
-			        }
-	          }
+			    int rVal = fileChooser.showOpenDialog(null);
+			    if (rVal == JFileChooser.APPROVE_OPTION) 
+			    {
+			      	String s=fileChooser.getSelectedFile().toString();
+			       	JTextField_MasterPage_ManagementMenu_Category_Add_Mainpanel_ImageTextF.setText(s);
+			       	ImageIcon image_takeout_sale = new ImageIcon(s);
+			       	
+			       	l=new JLabel(image_takeout_sale);
+					l.setPreferredSize(new Dimension(200,120));
+					l.setBorder(new TitledBorder(""));
+					JPanel_MasterPage_ManagementMenu_Category_Add_Mainpanel_ImageLabel_Panel.add(l);
+			    }
+	         }
 		});
-		
 		JButton JButton_MasterPage_ManagementMenu_Category_Add_Mainpanel_SaveButton=new JButton("Save");
 		JButton_MasterPage_ManagementMenu_Category_Add_Mainpanel_SaveButton.setBackground(Color.LIGHT_GRAY);
 		JButton_MasterPage_ManagementMenu_Category_Add_Mainpanel_SaveButton.setPreferredSize(new Dimension(150,50));
@@ -82,6 +85,7 @@ public class Management_Categoty_Add extends JFrame
 		Jpanel_MasterPage_ManagementMenu_Category_Add_Mainpanel.add(JTextField_MasterPage_ManagementMenu_Category_Add_Mainpanel_NameTextF);
 		Jpanel_MasterPage_ManagementMenu_Category_Add_Mainpanel.add(JLabel_MasterPage_ManagementMenu_Category_Add_Mainpanel_ImageLabel);
 		Jpanel_MasterPage_ManagementMenu_Category_Add_Mainpanel.add(JPanel_MasterPage_ManagementMenu_Category_Add_Mainpanel_ImageLabel_Panel);
+		
 		Jpanel_MasterPage_ManagementMenu_Category_Add_Mainpanel.add(JTextField_MasterPage_ManagementMenu_Category_Add_Mainpanel_ImageTextF);
 		Jpanel_MasterPage_ManagementMenu_Category_Add_Mainpanel.add(JButton_MasterPage_ManagementMenu_Category_Add_Mainpanel_BrowseButton);
 		Jpanel_MasterPage_ManagementMenu_Category_Add_Mainpanel.add(JButton_MasterPage_ManagementMenu_Category_Add_Mainpanel_SaveButton);
