@@ -201,13 +201,6 @@ public class MasterPage extends JFrame implements ActionListener
 		Panel_kitchen_view.add(panel_kitchen_view_mode);
 		Panel_kitchen_view.add(panel_table);
 		Panel_kitchen_view.setVisible(false);
-		
-		//MainFrame.add(Panel_main);
-	//	MainFrame.setVisible(true);
-	//	MainFrame.setSize(1000, 1000);
-	//	MainFrame.pack();
-	//	MainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-	//	Panel_main.setBackground(Color.GRAY);
 	}
 	
 	public static void main(String[] args) 
