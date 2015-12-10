@@ -369,14 +369,12 @@ public class MasterPage extends JFrame implements ActionListener
 				if(e.getSource()==Jbutton_MasterPage_Viewpanel_kitchenviewButton)
 				{
 					Jpanel_MasterPage_TabPanel.setVisible(false);	
-					Panel_kitchen_view.setVisible(true);
-									
+					Panel_kitchen_view.setVisible(true);					
 
 				}
             	
             }
         });
-        
         
         Jpanel_MasterPage_Viewpanel.add(Jbutton_MasterPage_Viewpanel_posButton);
         Jpanel_MasterPage_Viewpanel.add(Jbutton_MasterPage_Viewpanel_kitchenviewButton);
@@ -399,7 +397,6 @@ public class MasterPage extends JFrame implements ActionListener
         
             }
         });
-
         
         JButton Jbutton_MasterPage_Reportpanel_salesreportButton=new JButton("Sales Report");
         Jbutton_MasterPage_Reportpanel_salesreportButton.setBackground(Color.LIGHT_GRAY);
