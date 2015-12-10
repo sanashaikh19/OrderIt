@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 public class Management_Items_Add extends JFrame 
 {
 	static String column[]=new String[]{"Name","Price"};
-
+	FileInputStream is;
 	public void Management_Items_Add() 
 	{
 		final JFrame frame=new JFrame("Item Details");
@@ -53,14 +55,14 @@ public class Management_Items_Add extends JFrame
 		JLabel_MasterPage_ManagementMenu_Item_Add_CategoryPanel_DepartmentLabel.setPreferredSize(new Dimension(100,30));
 
 		String Department_Combo[]=new String[]{"Kitchen","Bar","Startered"};
-		JComboBox JCombobox_MasterPage_ManagementMenu_Item_Add_CategoryPanel_DepartmentCombo=new JComboBox(Department_Combo);
+		final JComboBox JCombobox_MasterPage_ManagementMenu_Item_Add_CategoryPanel_DepartmentCombo=new JComboBox(Department_Combo);
 		JCombobox_MasterPage_ManagementMenu_Item_Add_CategoryPanel_DepartmentCombo.setPreferredSize(new Dimension(180,30));
 
 		JLabel JLabel_MasterPage_ManagementMenu_Item_Add_CategoryPanel_CategoryLabel=new JLabel("Category");
 		JLabel_MasterPage_ManagementMenu_Item_Add_CategoryPanel_CategoryLabel.setPreferredSize(new Dimension(100,30));
 
 		String Category_Combo[]=new String[]{"Appentizer","Naan","Sphaghetti","Rice Variety","Thai Food","Indian Non-Veg","Indian Vegitarian","Arabic Curries","Grilled & Fried","Deserts & Fruits","Drinks","Shisha","Soup","Sandwich & Burger","Burmese Food"};
-		JComboBox JCombobox_MasterPage_ManagementMenu_Item_Add_CategoryPanel_CategoryCombo=new JComboBox(Category_Combo);
+		final JComboBox JCombobox_MasterPage_ManagementMenu_Item_Add_CategoryPanel_CategoryCombo=new JComboBox(Category_Combo);
 		JCombobox_MasterPage_ManagementMenu_Item_Add_CategoryPanel_CategoryCombo.setPreferredSize(new Dimension(180,30));
 
 		JLabel JLabel_MasterPage_ManagementMenu_Item_Add_CategoryPanel_TaxLabel=new JLabel("Tax(%)");
@@ -94,7 +96,13 @@ public class Management_Items_Add extends JFrame
 			      	String s=fileChooser.getSelectedFile().toString();
 			      	JTextField_MasterPage_ManagementMenu_Item_Add_CategoryPanel_ImageTextF.setText(s);
 			       	ImageIcon image_takeout_sale = new ImageIcon(s);
-			       	l.setIcon(image_takeout_sale);	       	
+			       	l.setIcon(image_takeout_sale);	
+			       	try {
+						is=new FileInputStream(s);
+					} catch (FileNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 			    }
 	         }
 		});
@@ -200,8 +208,11 @@ public class Management_Items_Add extends JFrame
 						pstmt.setString(2, JTextField_MasterPage_ManagementMenu_Item_Add_CategoryPanel_DefaultNameTextF.getText());
 						pstmt.setString(3, JTextField_MasterPage_ManagementMenu_Item_Add_CategoryPanel_EnoughForTextF.getText());
 						pstmt.setString(4, JTextField_MasterPage_ManagementMenu_Item_Add_CategoryPanel_PriceTextF.getText());
+						pstmt.setString(5, JCombobox_MasterPage_ManagementMenu_Item_Add_CategoryPanel_DepartmentCombo.getSelectedItem().toString());
+						pstmt.setString(6, JCombobox_MasterPage_ManagementMenu_Item_Add_CategoryPanel_CategoryCombo.getSelectedItem().toString());
 						pstmt.setString(7, JTextField_MasterPage_ManagementMenu_Item_Add_CategoryPanel_TaxTextf.getText());
-						pstmt.setString(9, JTextArea_MasterPage_ManagementMenu_Item_Add_CategoryPanel_DescriptionTextA.getText());	
+						pstmt.setBinaryStream(8, is,is.available());
+						pstmt.setString(9, JTextArea_MasterPage_ManagementMenu_Item_Add_CategoryPanel_DescriptionTextA.getText());
 						pstmt.setString(11, JTextArea_MasterPage_ManagementMenu_Item_Add_IngredientPanel_IngridientTextA.getText());
 						pstmt.executeUpdate();
 

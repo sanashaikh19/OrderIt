@@ -2,6 +2,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,7 +16,7 @@ import javax.swing.filechooser.FileFilter;
 
 public class Management_Categoty_Add extends JFrame 
 {
-	
+	 InputStream is = null;
 	public void Management_Categoty_Add()
 	{
 		final JFrame frame=new JFrame("Category List");
@@ -57,7 +60,13 @@ public class Management_Categoty_Add extends JFrame
 			      	String s=fileChooser.getSelectedFile().toString();
 			       	JTextField_MasterPage_ManagementMenu_Category_Add_Mainpanel_ImageTextF.setText(s);
 			       	ImageIcon image_takeout_sale = new ImageIcon(s);
-			       	l.setIcon(image_takeout_sale);	       	
+			       	l.setIcon(image_takeout_sale);	
+			     	try {
+						is = new FileInputStream(s);
+					} catch (FileNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 			    }
 	         }
 		});
@@ -81,15 +90,17 @@ public class Management_Categoty_Add extends JFrame
                 		
                 		Connection con=DriverManager.getConnection("jdbc:mysql://192.168.1.102:3306/rachana?","root","root");
                 		
-                		String sql="insert into customer(Customer_Name,Customer_Phone,Customer_PostalCode,Customer_EmailID,Customer_Address) VALUES(?,?,?,?,?)";
+                		String sql="insert into category(Category_Name,Category_Image) VALUES(?,?)";
                 		
                 		PreparedStatement pstmt = con.prepareStatement(sql);
                 		
                 		pstmt.setString(1, JTextField_MasterPage_ManagementMenu_Category_Add_Mainpanel_NameTextF.getText());
+                		pstmt.setBinaryStream(2, is,is.available());
                 		
                     	pstmt.executeUpdate();
                     	
-                    	JOptionPane.showMessageDialog(null, "Added Successfully","Added",JOptionPane.PLAIN_MESSAGE);                	   
+                    	JOptionPane.showMessageDialog(null, "Added Successfully","Added",JOptionPane.PLAIN_MESSAGE); 
+                    	JTextField_MasterPage_ManagementMenu_Category_Add_Mainpanel_NameTextF.setText("");
                 	}
 
 	                catch(Exception ex)

@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,6 +13,7 @@ import javax.swing.border.TitledBorder;
 
 public class Management_Promotion_Add extends JFrame 
 {
+	FileInputStream is;
 	public void Management_Promotion_Add() 
 	{
 		final JFrame frame=new JFrame("Promotion Details");	
@@ -81,7 +84,13 @@ public class Management_Promotion_Add extends JFrame
 			      	String s=fileChooser.getSelectedFile().toString();
 			      	JTextField_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PictureTextF.setText(s);
 			       	ImageIcon image_takeout_sale = new ImageIcon(s);
-			       	l.setIcon(image_takeout_sale);	       	
+			       	l.setIcon(image_takeout_sale);	  
+			       	try {
+						is=new FileInputStream(s);
+					} catch (FileNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 			    }
 	         }
 		});
@@ -116,7 +125,7 @@ public class Management_Promotion_Add extends JFrame
                 		pstmt.setString(3, JTextField_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PromotePriceTextF.getText());
                 		pstmt.setString(4, JTextArea_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PromoteTextTextA.getText());
                 		pstmt.setString(5, JTextField_MasterPage_ManagementMenu_Promotion_Add_MainPanel_CouponCodeTextF.getText());
-                		
+                		pstmt.setBinaryStream(6, is,is.available());
                 		
                     	pstmt.executeUpdate();
                     	

@@ -4,9 +4,13 @@ import java.awt.Dimension;
 import java.awt.FileDialog;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.Statement;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -33,6 +37,7 @@ public class User_Detail implements ActionListener
 	JTextArea textarea_address;
 	JComboBox combobox_role;
 	JLabel l=new JLabel();
+	 InputStream is = null;
 
 	public User_Detail() {
 
@@ -136,8 +141,14 @@ public class User_Detail implements ActionListener
 		    {
 		      	String s=fileChooser.getSelectedFile().toString();
 		      	text_brows.setText(s);
-		       	ImageIcon image_takeout_sale = new ImageIcon(s);
-		       	l.setIcon(image_takeout_sale);	       	
+		       ImageIcon image_takeout_sale = new ImageIcon();
+		       	l.setIcon(image_takeout_sale);	
+		       	try {
+					is = new FileInputStream(s);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		    }
 
 		}
@@ -162,9 +173,9 @@ public class User_Detail implements ActionListener
 					pstmt.setInt(4,Integer.parseInt(text_phone.getText()));
 					pstmt.setString(5, textarea_address.getText());
 					pstmt.setString(6, combobox_role.getSelectedItem().toString());
-					pstmt.setString(7, text_brows.getText());
-					//	pstmt.setBinaryStream(8, fis, fis.available());
-
+					pstmt.setBinaryStream(7, is,is.available());
+					//pstmt.setString(8, text_brows.getText());
+					
 					pstmt.execute();
 					JOptionPane.showMessageDialog(null, "Customer Complaint Added Successfully","Added",JOptionPane.PLAIN_MESSAGE);
 
