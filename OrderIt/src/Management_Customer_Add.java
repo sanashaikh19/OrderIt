@@ -1,11 +1,19 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.Statement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.Scanner;
 
 import javax.swing.*;
 
 public class Management_Customer_Add extends JFrame 
-{
+{	
 	public void Management_Customer_Add() 
 	{
 		final JFrame frame=new JFrame("Customer");	
@@ -18,29 +26,28 @@ public class Management_Customer_Add extends JFrame
 		
 		JLabel JLabel_MasterPage_ManagementMenu_Customer_Add_Categorypanel_NameLabel=new JLabel("Name");
 		JLabel_MasterPage_ManagementMenu_Customer_Add_Categorypanel_NameLabel.setPreferredSize(new Dimension(90,30));
-		JTextField JTextField_MasterPage_ManagementMenu_Customer_Add_Categorypanel_NameTextF=new JTextField();
+		final JTextField JTextField_MasterPage_ManagementMenu_Customer_Add_Categorypanel_NameTextF=new JTextField();
 		JTextField_MasterPage_ManagementMenu_Customer_Add_Categorypanel_NameTextF.setPreferredSize(new Dimension(220,25));
 		
 		JLabel JLabel_MasterPage_ManagementMenu_Customer_Add_Categorypanel_PhoneLabel=new JLabel("Phone");
 		JLabel_MasterPage_ManagementMenu_Customer_Add_Categorypanel_PhoneLabel.setPreferredSize(new Dimension(90,30));
-		JTextField JTextField_MasterPage_ManagementMenu_Customer_Add_Categorypanel_PhoneTextF=new JTextField();
+		final JTextField JTextField_MasterPage_ManagementMenu_Customer_Add_Categorypanel_PhoneTextF=new JTextField();
 		JTextField_MasterPage_ManagementMenu_Customer_Add_Categorypanel_PhoneTextF.setPreferredSize(new Dimension(220,25));
 		
 		JLabel JLabel_MasterPage_ManagementMenu_Customer_Add_Categorypanel_PostalCodeLabel=new JLabel("Postal Code");
 		JLabel_MasterPage_ManagementMenu_Customer_Add_Categorypanel_PostalCodeLabel.setPreferredSize(new Dimension(90,30));
-		JTextField JTextField_MasterPage_ManagementMenu_Customer_Add_Categorypanel_PostalCodeTextF=new JTextField();
+		final JTextField JTextField_MasterPage_ManagementMenu_Customer_Add_Categorypanel_PostalCodeTextF=new JTextField();
 		JTextField_MasterPage_ManagementMenu_Customer_Add_Categorypanel_PostalCodeTextF.setPreferredSize(new Dimension(220,25));
 		
 		JLabel JLabel_MasterPage_ManagementMenu_Customer_Add_Categorypanel_EmailLabel=new JLabel("Email");
 		JLabel_MasterPage_ManagementMenu_Customer_Add_Categorypanel_EmailLabel.setPreferredSize(new Dimension(90,30));
-		JTextField JTextField_MasterPage_ManagementMenu_Customer_Add_Categorypanel_EmailTextF=new JTextField();
+		final JTextField JTextField_MasterPage_ManagementMenu_Customer_Add_Categorypanel_EmailTextF=new JTextField();
 		JTextField_MasterPage_ManagementMenu_Customer_Add_Categorypanel_EmailTextF.setPreferredSize(new Dimension(220,25));
 		
 		JLabel JLabel_MasterPage_ManagementMenu_Customer_Add_Categorypanel_AddressLabel=new JLabel("Address");
 		JLabel_MasterPage_ManagementMenu_Customer_Add_Categorypanel_AddressLabel.setPreferredSize(new Dimension(90,30));
-		JTextArea JTextArea_MasterPage_ManagementMenu_Customer_Add_Categorypanel_AddressTextA=new JTextArea();
+		final JTextArea JTextArea_MasterPage_ManagementMenu_Customer_Add_Categorypanel_AddressTextA=new JTextArea();
 		JTextArea_MasterPage_ManagementMenu_Customer_Add_Categorypanel_AddressTextA.setPreferredSize(new Dimension(220,80));
-		
 		
 		Jpanel_MasterPage_ManagementMenu_Customer_Add_Categorypanel.add(JLabel_MasterPage_ManagementMenu_Customer_Add_Categorypanel_NameLabel);
 		Jpanel_MasterPage_ManagementMenu_Customer_Add_Categorypanel.add(JTextField_MasterPage_ManagementMenu_Customer_Add_Categorypanel_NameTextF);
@@ -59,6 +66,67 @@ public class Management_Customer_Add extends JFrame
 		JButton JButton_MasterPage_ManagementMenu_Customer_Add_MainPanel_SaveButton=new JButton("Save");
 		JButton_MasterPage_ManagementMenu_Customer_Add_MainPanel_SaveButton.setPreferredSize(new Dimension(100,45));
 		JButton_MasterPage_ManagementMenu_Customer_Add_MainPanel_SaveButton.setBackground(Color.LIGHT_GRAY);
+		
+		JButton_MasterPage_ManagementMenu_Customer_Add_MainPanel_SaveButton.addActionListener(new ActionListener() 
+	    {
+			public void actionPerformed(ActionEvent e) 
+	        {
+				if (JTextField_MasterPage_ManagementMenu_Customer_Add_Categorypanel_NameTextF.getText().equals("") )
+                {
+					JOptionPane.showMessageDialog(null,"Enter Name.");
+                }
+				else if (JTextField_MasterPage_ManagementMenu_Customer_Add_Categorypanel_PhoneTextF.getText().equals("") )
+                {
+					JOptionPane.showMessageDialog(null,"Enter Phone.");
+                }
+				else if (JTextField_MasterPage_ManagementMenu_Customer_Add_Categorypanel_PostalCodeTextF.getText().equals("") )
+                {
+					JOptionPane.showMessageDialog(null,"Enter Postal Code.");
+                }
+				else if (JTextField_MasterPage_ManagementMenu_Customer_Add_Categorypanel_EmailTextF.getText().equals("") )
+                {
+					JOptionPane.showMessageDialog(null,"Enter Email ID.");
+                }
+				else if (JTextArea_MasterPage_ManagementMenu_Customer_Add_Categorypanel_AddressTextA.getText().equals("") )
+                {
+					JOptionPane.showMessageDialog(null,"Enter Address.");
+                }
+				else
+                {               
+                	try
+                	{   
+                		Class.forName("com.mysql.jdbc.Driver");  
+                		
+                		Connection con=DriverManager.getConnection("jdbc:mysql://192.168.1.102:3306/rachana?","root","root");
+                		
+                		String sql="insert into customer(Customer_Name,Customer_Phone,Customer_PostalCode,Customer_EmailID,Customer_Address) VALUES(?,?,?,?,?)";
+                		
+                		PreparedStatement pstmt = con.prepareStatement(sql);
+                		
+                		pstmt.setString(1, JTextField_MasterPage_ManagementMenu_Customer_Add_Categorypanel_NameTextF.getText());
+                		
+                    	pstmt.setString(2, JTextField_MasterPage_ManagementMenu_Customer_Add_Categorypanel_PhoneTextF.getText());
+                    	
+                    	pstmt.setString(3, JTextField_MasterPage_ManagementMenu_Customer_Add_Categorypanel_PostalCodeTextF.getText());
+                    	
+                    	pstmt.setString(4, JTextField_MasterPage_ManagementMenu_Customer_Add_Categorypanel_EmailTextF.getText());
+                    	
+                    	pstmt.setString(5, JTextArea_MasterPage_ManagementMenu_Customer_Add_Categorypanel_AddressTextA.getText());
+                    	
+                    	pstmt.executeUpdate();
+                    	
+                    	JOptionPane.showMessageDialog(null, "Added Successfully","Added",JOptionPane.PLAIN_MESSAGE);                	   
+                	}
+
+	                catch(Exception ex)
+	                {
+	                    System.out.println(ex);
+	                    JOptionPane.showMessageDialog(null,"Error In Insertion","Error",JOptionPane.ERROR_MESSAGE);
+	                }
+                }
+				
+	        }
+	    });
 		
 		JLabel JLabel_MasterPage_ManagementMenu_Customer_Add_MainPanel_EmptyL=new JLabel("");
 		JLabel_MasterPage_ManagementMenu_Customer_Add_MainPanel_EmptyL.setPreferredSize(new Dimension(50,45));
@@ -87,7 +155,5 @@ public class Management_Customer_Add extends JFrame
 		frame.setLocation(500,200);
 	//	frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.setResizable(false);
-	//	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
-	
 	}
 }
