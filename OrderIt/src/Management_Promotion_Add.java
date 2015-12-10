@@ -16,7 +16,7 @@ public class Management_Promotion_Add extends JFrame
 		final JFrame frame=new JFrame("Promotion Details");	
 		
 		final JLabel l=new JLabel();
-		l.setPreferredSize(new Dimension(200,160));
+		l.setPreferredSize(new Dimension(230,150));
 		l.setBorder(new TitledBorder(""));
 		
 		JPanel Jpanel_MasterPage_ManagementMenu_Promotion_Add_Mainpanel=new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -51,8 +51,6 @@ public class Management_Promotion_Add extends JFrame
 		JColorChooser JColorChooser_MasterPage_ManagementMenu_Promotion_Add_MainPanel_Color=new JColorChooser();
 		JColorChooser_MasterPage_ManagementMenu_Promotion_Add_MainPanel_Color.setPreferredSize(new Dimension(230,30));
 
-		
-		
 		JLabel JLabel_MasterPage_ManagementMenu_Promotion_Add_MainPanel_CouponCodeLabel=new JLabel("Coupon Code");
 		JLabel_MasterPage_ManagementMenu_Promotion_Add_MainPanel_CouponCodeLabel.setPreferredSize(new Dimension(120,30));
 		final JTextField JTextField_MasterPage_ManagementMenu_Promotion_Add_MainPanel_CouponCodeTextF=new JTextField();
@@ -67,7 +65,7 @@ public class Management_Promotion_Add extends JFrame
 		JTextField_MasterPage_ManagementMenu_Promotion_Add_MainPanel_PictureTextF.setPreferredSize(new Dimension(130,30));
 		
 		JButton JButton_MasterPage_ManagementMenu_Promotion_Add_MainPanel_BrowseButton=new JButton("Browse");
-		JButton_MasterPage_ManagementMenu_Promotion_Add_MainPanel_BrowseButton.setPreferredSize(new Dimension(90,30));
+		JButton_MasterPage_ManagementMenu_Promotion_Add_MainPanel_BrowseButton.setPreferredSize(new Dimension(100,30));
 		JButton_MasterPage_ManagementMenu_Promotion_Add_MainPanel_BrowseButton.setBackground(Color.LIGHT_GRAY);
 		
 		JButton_MasterPage_ManagementMenu_Promotion_Add_MainPanel_BrowseButton.addActionListener(new ActionListener() 
@@ -135,7 +133,7 @@ public class Management_Promotion_Add extends JFrame
         });
 		
 		JLabel JLabel_MasterPage_ManagementMenu_Promotion_Add_MainPanel_EmptyL=new JLabel("");
-		JLabel_MasterPage_ManagementMenu_Promotion_Add_MainPanel_EmptyL.setPreferredSize(new Dimension(90,55));
+		JLabel_MasterPage_ManagementMenu_Promotion_Add_MainPanel_EmptyL.setPreferredSize(new Dimension(110,55));
 		
 		JButton JButton_MasterPage_ManagementMenu_Promotion_Add_MainPanel_CancelButton=new JButton("Cancel");
 		JButton_MasterPage_ManagementMenu_Promotion_Add_MainPanel_CancelButton.setPreferredSize(new Dimension(120,55));
