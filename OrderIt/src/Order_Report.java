@@ -32,10 +32,6 @@ public class Order_Report implements ActionListener
 	JCheckBox checkbox_type,checkbox_date,checkbox_tablename,checkbox_orderno,checkbox_status,checkbox_user;
 	JTextField text_orderno;
 	JComboBox combobox_type,combobox_tablename,combobox_user,combobox_status;
-/*	public static void main(String[] args) 
-	{
-		Order_Report or=new Order_Report();
-	}*/
 	public void Order_Report()
 	{
 		JPanel panel_main=new JPanel(new FlowLayout(FlowLayout.LEFT));
