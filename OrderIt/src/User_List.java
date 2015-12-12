@@ -18,10 +18,6 @@ public class User_List implements ActionListener
 	static String column[]=new String[]{" User Name ","Phone","Email","Address","Role"};
 	JButton button_add,button_edit,button_delete,button_close;
 	JFrame MainFrame=new JFrame("User List");
-	/*public static void main(String[] args)
-	{
-		User_List ul=new User_List();
-	}*/
 	public void User_List()
 	{
 		JPanel panel_main=new JPanel(new FlowLayout(FlowLayout.RIGHT));
@@ -46,7 +42,6 @@ public class User_List implements ActionListener
 		button_delete.addActionListener((ActionListener) this);
 		button_close.addActionListener((ActionListener) this);
 
-		
 		JLabel label_discount_list=new JLabel("User List");
 		label_discount_list.setPreferredSize(new Dimension(350,50));
 		
